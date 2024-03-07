@@ -6,7 +6,6 @@
     max-width: 50px;
     border-radius: 7%;
     aspect-ratio: 1/1;
-    /* background-color: rgb(179, 179, 179); */
     display: flex;
     justify-content: space-between;
     z-index: 999;
@@ -73,7 +72,6 @@ aside.side-menu li:hover {
 aside.side-menu li:hover > a {
     color: white;
 }
-
 
 aside.side-menu a {
     color: rgb(245, 99, 15);

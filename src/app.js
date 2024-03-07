@@ -1,10 +1,8 @@
-import { util } from "../utils/util.js";
-import { eventBus } from "./eventBus.js";
-import { eventsArr } from "./constants.js";
-import Events from "./events.js";
+import { util } from "../utils/globalUtil.js";
+import { eventBus } from "./lib/eventBus.js";
+import { GLOBAL_EVENT_TYPES } from "./constants.js";
+import EventManager from "./lib/eventManager.js";
 import { sideMenuComponent } from "./components/sideMenu.js";
 
-const globalEvents = new Events(eventsArr, document, eventBus);
-globalEvents.init()
-
+const eventManager = new EventManager(GLOBAL_EVENT_TYPES, document, eventBus);
 const sideMenu = new sideMenuComponent();

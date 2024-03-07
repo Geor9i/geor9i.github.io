@@ -1,7 +1,8 @@
-import { eventBus } from "../eventBus.js";
+import { eventBus } from "../lib/eventBus.js";
 
 export class sideMenuComponent {
   constructor() {
+    this.eventSubscriberId = 'menuButton';
     this.sideMenu = document.querySelector("aside.side-menu");
     this.menuButton = document.querySelector(".menu-button");
     this.sideMenuBackdrop = document.querySelector(".side-menu-backdrop");
@@ -25,17 +26,17 @@ export class sideMenuComponent {
     };
 
     this.eventBus.subscribe(
-      "menuButton",
+      this.eventSubscriberId,
       "click",
-      { target: this.menuButton },
-      toggle.bind(this)
+      toggle.bind(this),
+      { target: this.menuButton }
     );
 
     this.eventBus.subscribe(
-      "menuButton",
+      this.eventSubscriberId,
       "click",
-      { target: this.sideMenuBackdrop },
-      close.bind(this)
+      close.bind(this),
+      { target: this.sideMenuBackdrop }
     );
   }
 }

@@ -1,1 +1,1 @@
-export const eventsArr = ['click'];
+export const GLOBAL_EVENT_TYPES = ['click'];
