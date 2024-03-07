@@ -9,7 +9,7 @@ globalEvents.init()
 
 
 const test = document.body;
-eventBus.subscribe(test, 'mousemove', {}, () => {
-    test.style['background-color'] = 'red';
+eventBus.subscribe('test', 'mousemove', {}, () => {
+    test.style.backgroundColor = 'red';
 })
 console.log(eventBus);
