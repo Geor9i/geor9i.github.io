@@ -2,13 +2,15 @@
     position: fixed;
     left: 3em;
     top: 3em;
-    width: 4vw;
+    width: 2vw;
+    max-width: 50px;
     border-radius: 7%;
     aspect-ratio: 1/1;
     /* background-color: rgb(179, 179, 179); */
     display: flex;
     justify-content: space-between;
     z-index: 999;
+    cursor: pointer;
 }
 
 .line {
