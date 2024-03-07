@@ -1,1 +1,1 @@
-export const eventsArr = ['mousemove', 'click', 'mouseover'];
+export const eventsArr = ['click'];

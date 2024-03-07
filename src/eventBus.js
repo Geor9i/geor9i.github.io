@@ -11,11 +11,11 @@ class EventBus {
    *
    * @param {Object} element element that will be subscribing to an event!
    * @param {string} eventType The type of event you a resubscribing to
-   * @param {Object} activateOn Specifies the behaviour of activation default: { currentTarget: null}
+   * @param {Object} activateOn Specifies the behaviour of activation default: { target: null}
    */
 
   subscribe(elementId, eventType, activateOn, callback) {
-    const eventId = this.eventId + 1;
+    const eventId = this.eventId++;
     if (!this.subscribers.hasOwnProperty(elementId)) {
       this.subscribers[elementId] = {};
     }
@@ -66,8 +66,8 @@ class EventBus {
       for (let recordName in this[e.type]) {
         const record = this[e.type][recordName];
         if (
-          !record.activateOn.hasOwnProperty("currentTarget") ||
-          record.activateOn.currentTarget === e.currentTarget
+          !record.activateOn.hasOwnProperty("target") ||
+          record.activateOn.target === e.target
         ) {
           subscriberIds.push(record.id);
         }

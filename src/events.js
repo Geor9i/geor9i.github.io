@@ -14,7 +14,7 @@ export default class Events {
     this.events.forEach((event) => {
       const eventRef = this.eventElement.addEventListener(event, (e) => {
         this.currentEvent = event;
-        console.log(e.type);
+        // console.log(e.type);
         this.eventBus.publish({ e });
       });
     });
