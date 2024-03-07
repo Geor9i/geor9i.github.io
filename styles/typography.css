@@ -1,0 +1,7 @@
+html {
+    font: 16px/1.5 'Roboto', sans-serif;
+}
+
+body, table, input {
+    font: inherit;
+}

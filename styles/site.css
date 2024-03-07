@@ -1,0 +1,16 @@
+@import url("reset.css");
+@import url("typography.css");
+@import url('components/side-menu.css');
+
+
+:root {
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+}
