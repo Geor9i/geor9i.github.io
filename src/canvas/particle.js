@@ -48,7 +48,7 @@ export default class Particle {
       rect: ["x", "y", "width", "height"],
       text: ["fontSize", "fontFamily", "textMessage", "x", "y"],
       line: ["lineData"],
-      sideValues: ["strokeStyle", "color", "lineWidth", "strokeText", "shadowColor", "shadowBlur"],
+      sideValues: ["strokeStyle", "color", "lineWidth", "strokeText", "shadowColor", "shadowBlur", 'static'],
     };
     return propOrder[shape];
   }
@@ -105,6 +105,8 @@ export default class Particle {
   }
 
   update(props) {
+    if (this.static) return;
+
     for (let prop in props) {
       if (this.hasOwnProperty(prop)) {
         this[prop] = props[prop];

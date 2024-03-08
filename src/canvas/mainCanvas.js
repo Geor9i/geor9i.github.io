@@ -26,6 +26,8 @@ export default class MainCanvasComponent {
     this.resizeCanvas();
     this.canvas.classList.remove("inactive");
     this.ctx = this.canvas.getContext("2d");
+    // this.grid();
+    // this.canvasDark();
     this.mouseLight();
     this.mouseEvents();
     this.animate();
@@ -44,6 +46,23 @@ export default class MainCanvasComponent {
     );
   }
 
+  canvasDark() {
+    const props = {
+      x: 0,
+      y: 0,
+      width: this.canvas.width,
+      height: this.canvas.height,
+      color: "rgba(0,0,0,0.9)",
+      static: true,
+    };
+
+    this.particles.dark = [];
+    const darkRect = new this.particleClass("rect", this.ctx);
+    darkRect.particleProps(props);
+    console.log(darkRect);
+    this.particles.dark.push(darkRect);
+  }
+
   mouseLight() {
     const props = {
       x: this.mouseX,
@@ -51,8 +70,8 @@ export default class MainCanvasComponent {
       radius: 200,
       color: "rgba(255,255,255,1)",
       lineWidth: 1,
-    //   shadowBlur: 5,
-    //   shadowColor: "white",
+      //   shadowBlur: 5,
+      //   shadowColor: "white",
     };
 
     const goldenRatio = (1 + Math.sqrt(5)) / 2;
@@ -77,19 +96,49 @@ export default class MainCanvasComponent {
       } else {
         transitionProgress =
           (i - groupIterations * groupIndex) / groupIterations;
-        currentRadius = currentRadius - (currentRadius * transitionProgress);
-        colorGroup.a = Math.min(1, groupIndex > 0 ? transitionProgress * 3 : transitionProgress * 0.3);
+        currentRadius = currentRadius - currentRadius * transitionProgress;
+        colorGroup.a = Math.min(
+          1,
+          groupIndex > 0 ? transitionProgress * 3 : transitionProgress * 0.3
+        );
       }
 
       props.color = `rgba(${Object.values(colorGroup).join(", ")})`;
       const finalProps = { ...props, radius: currentRadius };
-      console.log(finalProps);
       lightSphere.particleProps(finalProps);
       this.particles.lightSphere.push(lightSphere);
     }
   }
+  grid() {
+    const particleCount = 20;
+    const sizeX = this.canvas.width / particleCount;
+    const sizeY = this.canvas.height / particleCount;
 
-  updateMouseLight() {}
+    this.particles.grid = [];
+    for (let i = 0; i < particleCount; i++) {
+      for (let j = 0; j < particleCount; j++) {
+            const props = {
+                x: j * sizeX,
+                y: i * sizeY,
+                lineWidth: 0.1,
+                strokeStyle: "black",
+                static: true
+              };
+              const linedata = [
+                { prompt: "moveTo", x: props.x, y: props.y },
+                { prompt: "lineTo", x: props.x + (j + 1), y: props.y },
+                { prompt: "lineTo", x: props.x + (j + 1), y: props.y * (i + 1) },
+                { prompt: "lineTo", x: props.x, y: props.y + (i + 1) },
+                { prompt: "lineTo", x: props.x, y: props.y },
+            ]
+            
+              const line = new this.particleClass("line", this.ctx);
+              line.particleProps(linedata);
+              console.log(line);
+              this.particles.grid.push(line);
+      }
+    }
+  }
 
   mouseEvents() {
     this.eventBus.subscribe(this.eventSubscriberId, "mousemove", (e) => {

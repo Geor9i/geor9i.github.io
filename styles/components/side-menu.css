@@ -80,11 +80,12 @@ aside.side-menu li {
 
 aside.side-menu li:hover {
     background-color: black;
-    border-radius: 5px;
 }
 
 aside.side-menu li:hover > a {
     color: white;
+    font-weight: 900;
+    font-size: 1.4em;
 }
 
 aside.side-menu a {
