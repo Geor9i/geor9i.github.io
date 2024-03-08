@@ -29,6 +29,7 @@
 }
 
 #summary .technologies .title {
+    text-transform: uppercase;
     font-size: 26px;
     font-weight: bold;
     line-height: 0.5;
@@ -66,7 +67,6 @@
     border-radius: 7px;
     background-color: rgb(255, 255, 255);
     inset: 0.3em;
-    z-index: 0;
     transition: background-color 0.2s ease-in, box-shadow 0.2s ease-in, inset 0.2s ease-in;
 }
 #summary .technologies .tech-stack .tech:hover::before {

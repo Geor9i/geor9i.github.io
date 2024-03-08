@@ -1,1 +1,1 @@
-export const GLOBAL_EVENT_TYPES = ['click', 'scroll', 'mousemove', 'mousedown', 'mouseup'];
+export const GLOBAL_EVENT_TYPES = ['click', 'scroll', 'mousemove', 'mousedown', 'mouseup', 'resize'];

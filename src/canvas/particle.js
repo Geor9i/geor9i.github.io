@@ -20,13 +20,15 @@ export default class Particle {
       height: 0,
       startAngle: 0,
       endAngle: Math.PI * 2,
-      stroke: false,
+      strokeStyle: false,
       color: false,
       lineWidth: 1,
       fontSize: 16,
       fontFamily: "Arial",
       textMessage: "",
       strokeText: false,
+      shadowColor: null,
+      shadowBlur: null
     };
     const requiredProps = [
       ...this._getPropOrder(this.shape),
@@ -46,7 +48,7 @@ export default class Particle {
       rect: ["x", "y", "width", "height"],
       text: ["fontSize", "fontFamily", "textMessage", "x", "y"],
       line: ["lineData"],
-      sideValues: ["stroke", "color", "lineWidth", "strokeText"],
+      sideValues: ["strokeStyle", "color", "lineWidth", "strokeText", "shadowColor", "shadowBlur"],
     };
     return propOrder[shape];
   }
@@ -89,10 +91,17 @@ export default class Particle {
       this.ctx.fillStyle = this.color;
       this.ctx.fill();
     }
-    if (this.stroke) {
+    if (this.strokeStyle) {
+        this.ctx.strokeStyle  = this.strokeStyle ;
       this.ctx.stroke();
     }
+
+    if (this.shadowColor) {
+        this.ctx.shadowColor = this.shadowColor;
+        this.ctx.shadowBlur = this.shadowBlur;
+    }
     this.ctx.closePath();
+
   }
 
   update(props) {

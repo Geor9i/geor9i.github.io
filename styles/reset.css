@@ -3,6 +3,7 @@ html {
 }
 
 *, *::before, *:after {
+    position: relative;
     padding: 0;
     margin: 0;
     box-sizing: inherit;
