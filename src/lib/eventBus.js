@@ -50,7 +50,7 @@ export class EventBus {
         if (subscriberEventIds && subscriberEventIds.length > 0) {
           this.subscribers[subscriber][e.type].forEach((subscription) => {
             if (subscriberEventIds.includes(subscription.id)) {
-              subscription.callback();
+              subscription.callback(e);
             }
           });
         }

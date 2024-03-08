@@ -27,7 +27,7 @@ export default class EventManager {
     const parents = [];
     const children = Array.from(e.target.children);
     while (currentElement !== document.body) {
-      currentElement = currentElement.parentElement;
+      currentElement = currentElement?.parentElement;
       parents.push(currentElement);
     }
     return { parents, children }

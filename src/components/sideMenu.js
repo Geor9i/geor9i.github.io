@@ -1,6 +1,6 @@
 import { eventBus } from "../lib/eventBus.js";
 
-export class sideMenuComponent {
+export class SideMenuComponent {
   constructor() {
     this.eventSubscriberId = 'menuButton';
     this.sideMenu = document.querySelector("aside.side-menu");

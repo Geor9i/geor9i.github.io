@@ -1,8 +1,11 @@
-import { util } from "../utils/globalUtil.js";
 import { eventBus } from "./lib/eventBus.js";
 import { GLOBAL_EVENT_TYPES } from "./constants.js";
 import EventManager from "./lib/eventManager.js";
-import { sideMenuComponent } from "./components/sideMenu.js";
+import { SideMenuComponent } from "./components/sideMenu.js";
+import MainComponent from "./components/main.js";
+import MainCanvasComponent from "./canvas/mainCanvas.js";
 
-const eventManager = new EventManager(GLOBAL_EVENT_TYPES, document, eventBus);
-const sideMenu = new sideMenuComponent();
+const eventManager = new EventManager(GLOBAL_EVENT_TYPES, document.body, eventBus);
+const sideMenu = new SideMenuComponent();
+const mainComponent = new MainComponent();
+const mainCanvasComponent = new MainCanvasComponent();

@@ -1,6 +1,8 @@
 @import url("reset.css");
 @import url("typography.css");
 @import url('components/side-menu.css');
+@import url('components/main-content.css');
+@import url('components/summary.css');
 
 
 :root {
@@ -8,13 +10,22 @@
 
 .wrapper {
     position: relative;
+    padding: 8em;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
+    max-width: 100vw;
 }
 
 .inactive {
     display: none;
+}
+
+#main-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
 }

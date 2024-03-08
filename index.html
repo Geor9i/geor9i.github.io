@@ -11,6 +11,8 @@
 
     <div class="wrapper">
 
+        <canvas id="main-canvas" class="inactive"></canvas>
+
         <div class="menu-button">
             <div class="line"></div>
             <div class="line"></div>
@@ -20,10 +22,10 @@
 
         <aside class="side-menu side-menu-closed">
             <ul>
-                <li><a href="Summary">Summary</a></li>
+                <li><a href="#summary">Summary</a></li>
                 <li><a href="Contacts">Contacts</a></li>
                 <li><a href="Education">Education</a></li>
-                <li><a href="Experience">Experience</a></li>
+                <li><a href="#experience">Experience</a></li>
                 <li><a href="Skills">Skills</a></li>
                 <li><a href="Certificates">Certificates</a></li>
                 <li><a href="Projects">Projects</a></li>
@@ -32,9 +34,64 @@
             </ul>
         </aside>
 
-       <main></main>
+        <main>
+            <section id="summary" >
+                <p class="name">Georgi Urumov</p>
 
-    </div>
+                <blockquote>
+                    <p class="summary"><span>"</span>Motivated, problem-solving tech enthusiast persuing a career as a Full-Stack developer, <br> ready
+                        to join a dynamic team.<span>"</span></p>
+                </blockquote>
+
+                <div class="technologies">
+                    <p class="title">Technologies</p>
+                    <div class="tech-stack">
+                        <div class="tech">
+                            <div>
+                                <p>JavaScript</p>
+                            <img src="./icons/js.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tech">
+                            <div>
+                                <p>HTML</p>
+                            <img src="./icons/html-5.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tech">
+                            <div>
+                                <p>CSS</p>
+                            <img src="./icons/social.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tech">
+                            <div>
+                                <p>TypeScript</p>
+                            <img src="./icons/typescript.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tech">
+                            <div>
+                                <p>React</p>
+                            <img src="./icons/atom.png" alt="">
+                            </div>
+                        </div>
+                        <div class="tech">
+                            <div>
+                                <p>MongoDB</p>
+                            <img src="./icons/database.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+           
+        </main>
+
+
+    
+    </div> 
 
     
 </body>
