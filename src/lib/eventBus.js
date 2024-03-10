@@ -31,7 +31,8 @@ export class EventBus {
         this.buildSubscriptionEventObject(callback, eventId, options),
       ];
     }
-    this.subscribers[subsriberId].getSubscriberEvents = this._getSubscriberEvents;
+    this.subscribers[subsriberId].getSubscriberEvents =
+      this._getSubscriberEvents;
 
     const unsubscribe = () => {
       const index = this.subscribers[subsriberId][eventType].findIndex(
@@ -45,8 +46,9 @@ export class EventBus {
   publish({ e, parents, children }) {
     for (let subscriber in this.subscribers) {
       if (this.subscribers[subscriber].hasOwnProperty(e.type)) {
-        const subscriberEventIds =
-          this.subscribers[subscriber].getSubscriberEvents({ e, parents, children });
+        const subscriberEventIds = this.subscribers[
+          subscriber
+        ].getSubscriberEvents({ e, parents, children });
         if (subscriberEventIds && subscriberEventIds.length > 0) {
           this.subscribers[subscriber][e.type].forEach((subscription) => {
             if (subscriberEventIds.includes(subscription.id)) {
@@ -59,18 +61,19 @@ export class EventBus {
   }
 
   buildSubscriptionEventObject(callback, id, options) {
-
     const defaultOptions = {
       bubling: true,
       target: null,
-      stopPropagation: false
-    }
+      stopPropagation: false,
+    };
 
     return {
-      callback, id, options: {
+      callback,
+      id,
+      options: {
         ...defaultOptions,
-        ...options
-      }
+        ...options,
+      },
     };
   }
 
@@ -80,16 +83,37 @@ export class EventBus {
       for (let recordName in this[e.type]) {
         const record = this[e.type][recordName];
         const { bubling, target, stopPropagation } = record.options;
-        if (!target || e.target === target || bubling && parents.includes(target) || !bubling && children.includes(target)) {
+        if (
+          !target ||
+          e.target === target ||
+          (bubling && parents.includes(target)) ||
+          (!bubling && children.includes(target))
+        ) {
           subscriberIds.push(record.id);
-        } 
+        } else if (Array.isArray(target)) {
+          let isFound = target.includes(e.target);
+          if (bubling) {
+            target.forEach((el) => {
+              if (parents.includes(el)) {
+                isFound = true;
+              }
+            });
+          } else if (!bubling) {
+            target.forEach((el) => {
+              if (children.includes(el)) {
+                isFound = true;
+              }
+            });
+          }
+          if (isFound) {
+            subscriberIds.push(record.id);
+          }
+        }
       }
       return subscriberIds;
     }
     return null;
   }
-
 }
 
 export const eventBus = new EventBus();
-

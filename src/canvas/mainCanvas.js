@@ -28,7 +28,7 @@ export default class MainCanvasComponent {
     this.ctx = this.canvas.getContext("2d");
     // this.grid();
     // this.canvasDark();
-    this.mouseLight();
+    // this.mouseLight();
     this.mouseEvents();
     this.animate();
   }
