@@ -89,6 +89,8 @@ aside.side-menu li:hover > a {
 }
 
 aside.side-menu a {
+    display: block;
+    width: 100%;
     color: rgb(245, 99, 15);
     font-weight: bold;
     font-size: 20px;

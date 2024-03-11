@@ -34,7 +34,6 @@ export default class CertificatesComponent {
          }
       }
 
-      console.log(this.certificateIndex);
       this.display();
     }, {
       target: [this.arrowLeft, this.arrowRight],

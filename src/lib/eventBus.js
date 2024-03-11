@@ -83,31 +83,34 @@ export class EventBus {
       for (let recordName in this[e.type]) {
         const record = this[e.type][recordName];
         const { bubling, target, stopPropagation } = record.options;
-        if (
-          !target ||
-          e.target === target ||
-          (bubling && parents.includes(target)) ||
-          (!bubling && children.includes(target))
-        ) {
+        let pass = false;
+        if (!target) {
+          pass = true;
+        } else {
+          const targets = Array.isArray(target) ? target : [target];
+          const targetElements = targets.reduce((acc, el) => {
+            if (typeof el === "string") {
+                const elements = Array.from(document.querySelectorAll(el));
+                return acc.concat(elements);
+            } else {
+                return acc.concat(el);
+            }
+        }, []);
+
+          for (const targetElement of targetElements) {
+            if (
+              e.target === targetElement ||
+              (bubling && parents.includes(targetElement)) ||
+              (!bubling && children.includes(targetElement))
+            ) {
+              pass = true;
+              break;
+            }
+          }
+        }
+
+        if (pass) {
           subscriberIds.push(record.id);
-        } else if (Array.isArray(target)) {
-          let isFound = target.includes(e.target);
-          if (bubling) {
-            target.forEach((el) => {
-              if (parents.includes(el)) {
-                isFound = true;
-              }
-            });
-          } else if (!bubling) {
-            target.forEach((el) => {
-              if (children.includes(el)) {
-                isFound = true;
-              }
-            });
-          }
-          if (isFound) {
-            subscriberIds.push(record.id);
-          }
         }
       }
       return subscriberIds;
