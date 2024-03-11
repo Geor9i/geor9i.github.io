@@ -13,8 +13,15 @@ export default class EventManager {
 
     this.hasInitilized = true;
     this.eventTypes.forEach((event) => {
-      const eventSource = event === 'resize' ? window : this.eventElement;
-      const eventRef = eventSource.addEventListener(event, (e) => {
+      let eventName, eventSource;
+      if (typeof event === 'object') {
+        eventName = event.type;
+        eventSource = event.target;
+      } else {
+        eventName = event;
+        eventSource = this.eventElement;
+      }
+      const eventRef = eventSource.addEventListener(eventName, (e) => {
         this.currentEvent = event;
         const { parents, children } = this.getRelatives(e);
         this.eventBus.publish({ e, parents, children });
