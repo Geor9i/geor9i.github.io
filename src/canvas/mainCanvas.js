@@ -23,7 +23,6 @@ export default class MainCanvasComponent {
     const dimensions = this.wrapper.getBoundingClientRect();
     this.canvas.width = dimensions.width;
     this.canvas.height = dimensions.height;
-    this.resizeCanvas();
     this.canvas.classList.remove("inactive");
     this.ctx = this.canvas.getContext("2d");
     // this.grid();
@@ -31,19 +30,6 @@ export default class MainCanvasComponent {
     // this.mouseLight();
     this.mouseEvents();
     this.animate();
-  }
-
-  resizeCanvas() {
-    const resize = () => {
-      const dimensions = this.wrapper.getBoundingClientRect();
-      this.canvas.width = dimensions.width;
-      this.canvas.height = dimensions.height;
-    };
-    this.eventBus.subscribe(
-      this.eventSubscriberId,
-      "resize",
-      resize.bind(this)
-    );
   }
 
   canvasDark() {
@@ -117,25 +103,25 @@ export default class MainCanvasComponent {
     this.particles.grid = [];
     for (let i = 0; i < particleCount; i++) {
       for (let j = 0; j < particleCount; j++) {
-            const props = {
-                x: j * sizeX,
-                y: i * sizeY,
-                lineWidth: 0.1,
-                strokeStyle: "black",
-                static: true
-              };
-              const linedata = [
-                { prompt: "moveTo", x: props.x, y: props.y },
-                { prompt: "lineTo", x: props.x + (j + 1), y: props.y },
-                { prompt: "lineTo", x: props.x + (j + 1), y: props.y * (i + 1) },
-                { prompt: "lineTo", x: props.x, y: props.y + (i + 1) },
-                { prompt: "lineTo", x: props.x, y: props.y },
-            ]
-            
-              const line = new this.particleClass("line", this.ctx);
-              line.particleProps(linedata);
-              console.log(line);
-              this.particles.grid.push(line);
+        const props = {
+          x: j * sizeX,
+          y: i * sizeY,
+          lineWidth: 0.1,
+          strokeStyle: "black",
+          static: true,
+        };
+        const linedata = [
+          { prompt: "moveTo", x: props.x, y: props.y },
+          { prompt: "lineTo", x: props.x + (j + 1), y: props.y },
+          { prompt: "lineTo", x: props.x + (j + 1), y: props.y * (i + 1) },
+          { prompt: "lineTo", x: props.x, y: props.y + (i + 1) },
+          { prompt: "lineTo", x: props.x, y: props.y },
+        ];
+
+        const line = new this.particleClass("line", this.ctx);
+        line.particleProps(linedata);
+        console.log(line);
+        this.particles.grid.push(line);
       }
     }
   }
@@ -163,6 +149,17 @@ export default class MainCanvasComponent {
     this.eventBus.subscribe(this.eventSubscriberId, "mouseup", () => {
       this.mouseDown = false;
     });
+
+    const resize = () => {
+      const dimensions = this.wrapper.getBoundingClientRect();
+      this.canvas.width = dimensions.width;
+      this.canvas.height = dimensions.height;
+    };
+    this.eventBus.subscribe(
+      this.eventSubscriberId,
+      "resize",
+      resize.bind(this)
+    );
   }
   animate() {
     requestAnimationFrame(this.animate.bind(this));

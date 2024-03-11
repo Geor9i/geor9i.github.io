@@ -90,12 +90,12 @@ export class EventBus {
           const targets = Array.isArray(target) ? target : [target];
           const targetElements = targets.reduce((acc, el) => {
             if (typeof el === "string") {
-                const elements = Array.from(document.querySelectorAll(el));
-                return acc.concat(elements);
+              const elements = Array.from(document.querySelectorAll(el));
+              return acc.concat(elements);
             } else {
-                return acc.concat(el);
+              return acc.concat(el);
             }
-        }, []);
+          }, []);
 
           for (const targetElement of targetElements) {
             if (

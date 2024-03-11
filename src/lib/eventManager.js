@@ -13,7 +13,8 @@ export default class EventManager {
 
     this.hasInitilized = true;
     this.eventTypes.forEach((event) => {
-      const eventRef = this.eventElement.addEventListener(event, (e) => {
+      const eventSource = event === 'resize' ? window : this.eventElement;
+      const eventRef = eventSource.addEventListener(event, (e) => {
         this.currentEvent = event;
         const { parents, children } = this.getRelatives(e);
         this.eventBus.publish({ e, parents, children });
@@ -25,10 +26,12 @@ export default class EventManager {
   getRelatives(e) {
     let currentElement = e.target;
     const parents = [];
-    const children = Array.from(e.target.children);
-    while (currentElement !== document.body) {
+    const children = e.target.children ?Array.from(e.target.children): [];
+    while (currentElement && currentElement !== document.body) {
       currentElement = currentElement?.parentElement;
-      parents.push(currentElement);
+      if (currentElement) {
+        parents.push(currentElement);
+      }
     }
     return { parents, children }
   }
