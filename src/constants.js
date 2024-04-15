@@ -4,6 +4,6 @@ export const GLOBAL_EVENT_TYPES = [
   "mousemove",
   "mousedown",
   "mouseup",
-  { type: "resize", target: window },
+  { type: "resize", eventHost: window },
 ];
 // export const GLOBAL_EVENT_TYPES = ['click'];

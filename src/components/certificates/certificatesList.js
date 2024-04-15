@@ -1,5 +1,6 @@
 
 export const certificates = {
+    Diploma_JS_Web_Developer: "Diploma for JS Web Developer.jpeg",
     Compromising_Platforms: "Compromising Platforms - June 2023 - Certificate.jpeg",
     HTML_CSS: "HTML & CSS - January 2024 - Certificate.jpeg",
     JS_Advanced: "JS Advanced - May 2023 - Certificate.jpeg",

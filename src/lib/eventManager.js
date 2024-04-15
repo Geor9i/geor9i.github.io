@@ -1,46 +1,55 @@
+import { GLOBAL_EVENT_TYPES } from "../constants.js";
+import { eventBus } from "./eventBus.js";
+
 export default class EventManager {
-  constructor(eventTypes, eventElement, eventBus) {
-    this.eventElement = eventElement;
-    this.eventTypes = eventTypes;
-    this.currentEvent = null;
-    this.eventBus = eventBus;
+  
+  constructor(defaultHost) {
+    this.eventTypes = GLOBAL_EVENT_TYPES;
     this.hasInitilized = false;
-    this._init()
+    this.defaultHost = defaultHost;
+    this.maxParentCounter = 50;
+    this.eventBus = eventBus;
+    this._init();
   }
 
   _init() {
     if (this.hasInitilized) throw new Error('Events already Initialized!');
-
     this.hasInitilized = true;
     this.eventTypes.forEach((event) => {
-      let eventName, eventSource;
-      if (typeof event === 'object') {
-        eventName = event.type;
-        eventSource = event.target;
+      let type, eventHost;
+      if (typeof event === 'string') {
+        type = event;
+        eventHost = this.defaultHost;
       } else {
-        eventName = event;
-        eventSource = this.eventElement;
+        type = event.type;
+        eventHost = event.eventHost ? event.eventHost : this.defaultHost;
       }
-      const eventRef = eventSource.addEventListener(eventName, (e) => {
-        this.currentEvent = event;
-        const { parents, children } = this.getRelatives(e);
-        this.eventBus.publish({ e, parents, children });
-
-      });
+      if (eventHost) {
+        const eventRef = eventHost.addEventListener(type, (e) => {
+          const { parents, children } = this.getRelatives(e);
+          this.eventBus.publish({ e, parents, children });
+        });
+      }
     });
   }
 
   getRelatives(e) {
     let currentElement = e.target;
     const parents = [];
-    const children = e.target.children ?Array.from(e.target.children): [];
-    while (currentElement && currentElement !== document.body) {
-      currentElement = currentElement?.parentElement;
-      if (currentElement) {
+    if (e.target) {
+      const target = e.target;
+      const children = target.children ? Array.from(target.children) : [];
+      let counter = this.maxParentCounter;
+      while (currentElement && currentElement.parentElement && counter > 0) {
+        currentElement = currentElement.parentElement;
         parents.push(currentElement);
+        counter--;
+        if (currentElement === e.currentTarget) {
+          break;
+        }
       }
+      return { parents, children };
     }
-    return { parents, children }
+    return { parents: [], children: [] };
   }
-
 }

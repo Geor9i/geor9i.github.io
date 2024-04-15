@@ -1,57 +1,78 @@
-export class EventBus {
+class EventBus {
   constructor() {
     this.eventId = 0;
     this.subscribers = {};
   }
 
-  /**
-   *
-   * @param {String} subsriberId Subscriber Id as a string!
-   * @param {string} eventType The type of event you a subscribing to eg. click, mousemove, mouseout, etc.
-   * @param {Object} element element that will be subscribing to an event!
-   * @param {Object} options Specifies the behaviour of the event => default:  {
+  subscribe(subscriberId, eventType, callback, options) {
+    const eventId = this.eventId++;
+    if (!this.subscribers.hasOwnProperty(subscriberId)) {
+      this.subscribers[subscriberId] = {
+        eventTypes: {
+          [eventType]: [this.buildSubscription(callback, eventId, options)],
+        },
+        getSubEvents: this._getSubscriptionEvents,
+      };
+    } else {
+      this.subscribers[subscriberId] = {
+        ...this.subscribers[subscriberId],
+        eventTypes: {
+          ...(this.subscribers[subscriberId].eventTypes || {}),
+          [eventType]: [
+            ...(this.subscribers[subscriberId].eventTypes[eventType] || []),
+            this.buildSubscription(callback, eventId, options),
+          ],
+        },
+      };
+    }
+    const unsubscribe = () => {
+      const index = this.subscribers[subscriberId].eventTypes[
+        eventType
+      ].findIndex((subscription) => subscription.id === eventId);
+      this.subscribers[subscriberId].eventTypes[eventType].splice(index, 1);
+    };
+    return unsubscribe;
+  }
+  buildSubscription(callback, id, options) {
+    const defaultOptions = {
       bubling: true,
       target: null,
-      stopPropagation: false
-    }
-   */
-
-  subscribe(subsriberId, eventType, callback, options) {
-    const eventId = this.eventId++;
-    if (!this.subscribers.hasOwnProperty(subsriberId)) {
-      this.subscribers[subsriberId] = {};
-    }
-    if (!this.subscribers[subsriberId].hasOwnProperty(eventType)) {
-      this.subscribers[subsriberId][eventType] = [
-        this.buildSubscriptionEventObject(callback, eventId, options),
-      ];
-    } else {
-      this.subscribers[subsriberId][eventType] = [
-        ...this.subscribers[subsriberId][eventType],
-        this.buildSubscriptionEventObject(callback, eventId, options),
-      ];
-    }
-    this.subscribers[subsriberId].getSubscriberEvents =
-      this._getSubscriberEvents;
-
-    const unsubscribe = () => {
-      const index = this.subscribers[subsriberId][eventType].findIndex(
-        (el) => el.id === eventId
-      );
-      this.subscribers[subsriberId][eventType].splice(index, 1);
+      stopPropagation: false,
     };
-    return unsubscribe.bind(this);
+    let finalOptions;
+    if (options) {
+      finalOptions = {
+        ...defaultOptions,
+        ...options,
+      };
+    } else {
+      finalOptions = { ...defaultOptions };
+    }
+
+    return {
+      callback,
+      id,
+      options: finalOptions,
+    };
   }
 
   publish({ e, parents, children }) {
-    for (let subscriber in this.subscribers) {
-      if (this.subscribers[subscriber].hasOwnProperty(e.type)) {
-        const subscriberEventIds = this.subscribers[
-          subscriber
-        ].getSubscriberEvents({ e, parents, children });
-        if (subscriberEventIds && subscriberEventIds.length > 0) {
-          this.subscribers[subscriber][e.type].forEach((subscription) => {
-            if (subscriberEventIds.includes(subscription.id)) {
+    for (let subscriberId in this.subscribers) {
+      const subscriber = this.subscribers[subscriberId];
+      if (subscriber && subscriber.getSubEvents) {
+        const subscriptionIds = subscriber.getSubEvents({
+          e,
+          parents,
+          children,
+        });
+        if (
+          subscriptionIds &&
+          subscriptionIds.length > 0 &&
+          subscriber.eventTypes[e.type]
+        ) {
+          const subscriptionIdsSet = new Set(subscriptionIds);
+          subscriber.eventTypes[e.type].forEach((subscription) => {
+            if (subscriptionIdsSet.has(subscription.id)) {
               subscription.callback(e);
             }
           });
@@ -59,64 +80,47 @@ export class EventBus {
       }
     }
   }
-
-  buildSubscriptionEventObject(callback, id, options) {
-    const defaultOptions = {
-      bubling: true,
-      target: null,
-      stopPropagation: false,
-    };
-
-    return {
-      callback,
-      id,
-      options: {
-        ...defaultOptions,
-        ...options,
-      },
-    };
-  }
-
-  _getSubscriberEvents({ e, parents, children }) {
+  _getSubscriptionEvents({ e, parents, children }) {
     const subscriberIds = [];
-    if (this.hasOwnProperty(e.type)) {
-      for (let recordName in this[e.type]) {
-        const record = this[e.type][recordName];
-        const { bubling, target, stopPropagation } = record.options;
-        let pass = false;
-        if (!target) {
-          pass = true;
-        } else {
+    const subscriber = this;
+    if (subscriber["eventTypes"].hasOwnProperty(e.type)) {
+      const subscriptions = subscriber["eventTypes"][e.type];
+      subscriptions.forEach((subscription) => {
+        const { bubling, target, stopPropagation } = subscription.options;
+        if (target) {
           const targets = Array.isArray(target) ? target : [target];
-          const targetElements = targets.reduce((acc, el) => {
-            if (typeof el === "string") {
-              const elements = Array.from(document.querySelectorAll(el));
-              return acc.concat(elements);
-            } else {
-              return acc.concat(el);
-            }
-          }, []);
-
-          for (const targetElement of targetElements) {
+          const targetElements = targets.reduce(
+            (acc, elementData) => {
+              if (typeof elementData === "string") {
+                const elements = Array.from(
+                  document.querySelectorAll(elementData)
+                ).filter((el) => el !== null);
+                return acc.concat(elements);
+              } else {
+                return acc.concat(elementData);
+              }
+            },
+            []
+          );
+          for (const element of targetElements) {
             if (
-              e.target === targetElement ||
-              (bubling && parents.includes(targetElement)) ||
-              (!bubling && children.includes(targetElement))
+              e.target === element ||
+              (bubling && parents.includes(element)) ||
+              (!bubling && children.includes(element))
             ) {
-              pass = true;
+              subscriberIds.push(subscription.id);
               break;
             }
           }
+        } else {
+          subscriberIds.push(subscription.id);
         }
-
-        if (pass) {
-          subscriberIds.push(record.id);
-        }
-      }
-      return subscriberIds;
+      });
+      return subscriberIds.length > 0 ? subscriberIds : null;
     }
     return null;
   }
 }
+
 
 export const eventBus = new EventBus();
