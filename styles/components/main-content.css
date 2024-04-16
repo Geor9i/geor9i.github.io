@@ -1,14 +1,19 @@
 .wrapper > main {
     max-width: 100vw;
+    padding: 10em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10em;
 }
 
 .wrapper > main > section {
+    flex: 1 0;
     display: flex;
     opacity: 0;
     align-items: center;
     flex-direction: column;
-    transform: translateX(10%);
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+    transform: translateX(12%);
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
 }
 
 .wrapper > main > section.show {

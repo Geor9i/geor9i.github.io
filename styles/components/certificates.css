@@ -1,5 +1,11 @@
 #certificates {
   padding: 4em 2em;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
 }
 
 #certificates .title {
@@ -9,43 +15,86 @@
 }
 
 #certificates .frame {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80%;
-  padding: 2em;
   gap: 2em;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 }
 
-#certificates .frame .img {
-  box-shadow: 0.5em 0.6em 10px 2px rgba(0, 0, 0, 0.6);
-  width: 80%;
-  max-height: 700px;
+#certificates .frame .img-container {
+  width: 40%;
+  aspect-ratio: 0.70;
+  border-radius: 13px;
   overflow: hidden;
+  box-shadow: 0.5em 0.6em 10px 2px rgba(0, 0, 0, 0.3);
 }
 
-#certificates .frame .img img {
-  clip-path: inset(0 0 51% 0);
+#certificates .frame > img {
+  width: 100%;
+  height: auto;
 }
 
-.arrow {
+#certificates .frame .arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 6em;
-  aspect-ratio: 1/1;
-  border: solid rgb(0, 0, 0);
-  border-width: 0 2em 2em 0;
-  display: inline-block;
-  transition: border 0.1s ease-in;
+  height: 6em;
+  opacity: 0.5;
+  z-index: 1;
+  transition: opacity 0.1s ease-in
 }
 
-.arrow:hover {
-  border-color: var(--orange);
+#certificates .frame .arrow:hover {
   cursor: pointer;
+  opacity: 1;
 }
 
-.left {
-  transform: rotate(135deg);
+#certificates .frame .arrow.left {
+  left: 10%;
 }
 
-.right {
-  transform: rotate(-45deg);
+#certificates .frame .arrow.right {
+  right: 10%;
+}
+
+#certificates .frame .arrow.right img {
+  transform: scaleX(-1);
+}
+
+
+/*? Open Certificate */
+
+
+.open-certificate {
+  padding: 4em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  height: 80vh;
+  overflow: auto;
+  border: 3px solid black;
+  border-radius: 13px;
+  z-index: 1001;
+  background-color: white;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.open-certificate::-webkit-scrollbar {
+  display: none;
+}
+
+
+.certificate-backdrop {
+  position: absolute;
+  backdrop-filter: blur(30px);
+  inset: 0;
+  z-index: 1000;
 }

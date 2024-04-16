@@ -6,15 +6,7 @@ export default class MainComponent {
         this.mainElement = document.querySelector(".wrapper main");
         this.eventBus = eventBus;
         this.initScoll();
-        // this.scroll();
     }
-
-
-    // scroll() {
-    //     this.eventBus.subscribe(this.eventSubscriberId, 'scroll', (e) => {
-    //         console.log(e);
-    //     }, {target: this.mainElement})
-    // }
 
 
     initScoll() {
@@ -23,7 +15,7 @@ export default class MainComponent {
                 entry.target.classList.toggle('show', entry.isIntersecting)
             })
         }, {
-            threshold: 1
+            threshold: 0.8
         })
         const sections = this.mainElement.querySelectorAll('main > section');
         sections.forEach(section => observer.observe(section))

@@ -58,7 +58,7 @@ aside.side-menu {
 }
 
 aside.side-menu.side-menu-closed {
-    transform: translate(-100%);
+    transform: translate(-110%);
 }
 
 aside.side-menu ul {

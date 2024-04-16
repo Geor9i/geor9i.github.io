@@ -7,7 +7,7 @@ export class SideMenuComponent {
     this.menuButton = document.querySelector(".menu-button");
     this.sideMenuBackdrop = document.querySelector(".side-menu-backdrop");
     this.eventBus = eventBus;
-    this.close = this._close.bind(this);
+    this.findCenterclose = this._findCenterclose.bind(this);
     this.toggle = this._toggle.bind(this);
     this.init();
   }
@@ -17,7 +17,7 @@ export class SideMenuComponent {
       target: this.menuButton,
     });
 
-    this.eventBus.subscribe(this.eventSubscriberId, "click", this.close, {
+    this.eventBus.subscribe(this.eventSubscriberId, "click", this.findCenterclose, {
       target: [this.sideMenuBackdrop, '.wrapper aside ul li'],
     });
 
@@ -32,8 +32,16 @@ export class SideMenuComponent {
       this.sideMenuBackdrop.classList.add("inactive");
     }
   };
-  _close = () => {
+  _findCenterclose = (e) => {
     this.sideMenu.classList.add("side-menu-closed");
     this.sideMenuBackdrop.classList.add("inactive");
+
+    const id = e.target.id.split('-')[0];
+    const section = document.getElementById(id);
+    console.log(section.offsetTop, section.offsetHeight);
+    const scrollTarget = section.offsetTop - ((window.innerHeight - section.offsetHeight) / 2);
+    console.log('scrollTarget: ', scrollTarget);
+    window.scrollTo({top: scrollTarget, behavior: 'smooth'});
+    
   };
 }
