@@ -3,7 +3,7 @@ import { eventBus } from "../lib/eventBus.js";
 export default class TechnologiesComponent {
   constructor() {
     this.eventSubscriberId = "techologies";
-    this.mainElement = document.querySelector(".wrapper > main .technologies");
+    this.mainElement = document.querySelector(".wrapper > main #technologies");
     this.eventBus = eventBus;
     this.display()
   }
@@ -16,13 +16,14 @@ export default class TechnologiesComponent {
       { name: "CSS", src: `${path}/social.png` },
       { name: "TypeScript", src: `${path}/typescript.png` },
       { name: "React", src: `${path}/atom.png` },
+      { name: "Angular", src: `${path}/angular.png` },
       { name: "MongoDB", src: `${path}/database.png` },
     ];
   }
 
   display() {
     this.techStack = this._stackLoader();
-    const parent = document.querySelector('.wrapper > main .technologies .tech-stack')
+    const parent = this.mainElement.querySelector('#technologies .tech-stack')
     let fragment = document.createDocumentFragment()
     this.techStack.forEach(tech => {
         const container = document.createElement('DIV');
