@@ -6,13 +6,6 @@
     gap: 3em;
 }
 
-#technologies .title {
-    text-transform: uppercase;
-    font-size: 26px;
-    font-weight: bold;
-    line-height: 0.5;
-}
-
 #technologies .tech-stack {
     padding: 0.5em 0;
     display: flex;
@@ -61,4 +54,16 @@
 #technologies .tech-stack .tech img {
     width: auto;
     max-height: 30px;
+}
+
+
+#technologies .tech-stack > * {
+    transform: translateX(0);
+    opacity: 1;
+    transition: transform 0.2s ease-in, opacity 0.2s ease-in;
+}
+
+#technologies .tech-stack > .fade {
+    transform: translateX(15%);
+    opacity: 0;
 }

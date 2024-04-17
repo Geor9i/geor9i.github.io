@@ -5,7 +5,34 @@ export default class TechnologiesComponent {
     this.eventSubscriberId = "techologies";
     this.mainElement = document.querySelector(".wrapper > main #technologies");
     this.eventBus = eventBus;
+    this.fadeTechnologies = this._fadeTechnologies.bind(this);
+    this.intervalRef = null;
     this.display()
+    this.init();
+  }
+
+
+  init() {
+    this.eventBus.subscribe(this.eventSubscriberId, 'scrollElement', this.fadeTechnologies);
+  }
+
+  _fadeTechnologies(e) {
+    const observer = e.detail;
+    if (observer.target.id !== 'technologies') return;
+
+    let children = Array.from(this.mainElement.querySelector('#technologies .tech-stack').children);
+    if (observer.isIntersecting && !this.intervalRef) {
+      this.intervalRef = setInterval(() => {
+        let child = children.shift();
+        if (child) {
+          child.classList.remove("fade");
+        } else {
+          this.intervalRef = null;
+        }
+      }, 150);
+    } else {
+      children.forEach((child) => child.classList.add("fade"));
+    }
   }
 
   _stackLoader() {

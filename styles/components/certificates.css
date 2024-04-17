@@ -8,12 +8,6 @@
   gap: 1.5em;
 }
 
-#certificates .title {
-  text-transform: uppercase;
-  font-size: 32px;
-  font-weight: bold;
-}
-
 #certificates .frame {
   position: relative;
   display: flex;
@@ -31,6 +25,7 @@
   border-radius: 13px;
   overflow: hidden;
   box-shadow: 0.5em 0.6em 10px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 #certificates .frame > img {
@@ -78,6 +73,7 @@
   transform: translate(-50%, -50%);
   z-index: 1000;
   height: 80vh;
+  width: 60vw;
   overflow: auto;
   border: 3px solid black;
   border-radius: 13px;
@@ -85,16 +81,32 @@
   background-color: white;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  transition: opacity 0.1s ease-in;
+  opacity: 0.4;
+}
+
+.open-certificate:hover {
+  opacity: 1;
+}
+
+.open-certificate img {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .open-certificate::-webkit-scrollbar {
   display: none;
 }
 
-
 .certificate-backdrop {
   position: absolute;
   backdrop-filter: blur(30px);
   inset: 0;
   z-index: 1000;
+  transition: backdrop-filter 0.1s ease-in;
+}
+
+.certificate-backdrop:hover {
+  backdrop-filter: blur(5px);
+  cursor: pointer;
 }

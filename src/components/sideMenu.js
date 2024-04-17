@@ -38,10 +38,7 @@ export class SideMenuComponent {
 
     const id = e.target.id.split('-')[0];
     const section = document.getElementById(id);
-    console.log(section.offsetTop, section.offsetHeight);
     const scrollTarget = section.offsetTop - ((window.innerHeight - section.offsetHeight) / 2);
-    console.log('scrollTarget: ', scrollTarget);
     window.scrollTo({top: scrollTarget, behavior: 'smooth'});
-    
   };
 }

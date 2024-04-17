@@ -56,7 +56,7 @@ class EventBus {
     };
   }
 
-  publish({ e, parents, children }) {
+  publish({ e, parents = [], children = [] }) {
     for (let subscriberId in this.subscribers) {
       const subscriber = this.subscribers[subscriberId];
       if (subscriber && subscriber.getSubEvents) {

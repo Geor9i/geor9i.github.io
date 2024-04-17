@@ -4,10 +4,15 @@ import MainComponent from "./components/main.js";
 import MainCanvasComponent from "./canvas/mainCanvas.js";
 import CertificatesComponent from "./components/certificates/certificates.js";
 import TechnologiesComponent from "./components/technologies.js";
+import LanguagesComponent from "./components/languages.js";
+import SummaryComponent from "./components/summary.js";
 
 const eventManager = new EventManager(document.body);
 const sideMenu = new SideMenuComponent();
 const mainComponent = new MainComponent();
+
+const summaryComponent = new SummaryComponent();
 const technologiesComponent = new TechnologiesComponent();
 const mainCanvasComponent = new MainCanvasComponent();
 const certificatesComponent = new CertificatesComponent();
+const languagesComponent = new LanguagesComponent();
