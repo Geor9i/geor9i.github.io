@@ -64,6 +64,6 @@
 }
 
 #technologies .tech-stack > .fade {
-    transform: translateX(15%);
+    transform: translateX(30%);
     opacity: 0;
 }

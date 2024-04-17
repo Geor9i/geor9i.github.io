@@ -1,11 +1,43 @@
-#languages .language-container {
+#languages .main-lang-container {
+    display: flex;
+    max-width: 60vw;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+#languages .lang-container {
+    flex: 0 0 100%;
+    height: 200px;
     padding: 2em 0;
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: flex-end;
+    gap: 1em;
 }
 
-#languages .language-container p {
-    font-size: 2em;
+
+#languages .lang-container > p {
+    padding-bottom: 0.5em;
+    font-size: 1.5em;
     font-weight: bold;
+}
+
+#languages .graph-container {
+    height: 100%;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#languages .graph-container > p {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#languages .lang-level {
+    /* padding: 1em; */
+    width: 100%;
+    height: 100%;
 }
