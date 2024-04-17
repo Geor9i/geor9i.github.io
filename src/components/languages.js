@@ -11,7 +11,7 @@ export default class LanguagesComponent {
         this.languages = [
             {lang: 'Bulgarian', level: 100, title:  'Native'},
             {lang: 'English', level: 80, title:  'Proficient'},
-            {lang: 'German', level: 35, title:  'Intermediate'},
+            {lang: 'German', level: 30, title:  'Intermediate'},
             {lang: 'Icelandic', level: 15, title:  'Basic'},
         ];
         this.init();
@@ -104,9 +104,9 @@ export default class LanguagesComponent {
         const progress = takeValue ? value : (value / this.linesCount) * 100;
         if (progress < 20) {
             return '#fb4b4b';  
-        } else if (progress < 40) {
+        } else if (progress < 30) {
             return '#ffa879';  
-        } else if (progress < 60) {
+        } else if (progress < 50) {
             return '#ffc163'; 
         } else {
             return '#2cf554'; 

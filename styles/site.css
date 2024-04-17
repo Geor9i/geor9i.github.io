@@ -1,8 +1,10 @@
 @import url("reset.css");
 @import url("typography.css");
+@import url("animations/clipboard.css");
 @import url('components/side-menu.css');
 @import url('components/main-content.css');
 @import url('components/summary.css');
+@import url('components/contacts.css');
 @import url('components/certificates.css');
 @import url('components/technologies.css');
 @import url('components/languages.css');
@@ -39,3 +41,4 @@
 .lock {
     overflow: hidden;
 }
+

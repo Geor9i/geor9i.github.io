@@ -5,10 +5,6 @@
     letter-spacing: 3px;
 }
 
-#summary > blockquote {
-    padding: 4em;
-}
-
 #summary .summary {
     text-align: center;
     word-spacing: 0.2em;
