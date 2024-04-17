@@ -7,6 +7,7 @@ export default class ContactsComponent {
     this.eventBus = eventBus;
     this.contacts = [];
     this.activateContact = this._activateContact.bind(this);
+    this.notifierActive = false;
     this.init();
   }
 
@@ -58,20 +59,25 @@ export default class ContactsComponent {
         window.location.href = data.link
       } else {
         navigator.clipboard.writeText(data.text);
-        const notifier = document.createElement('P');
-        notifier.textContent = 'Text Copied!'
-        notifier.classList.add('clipboard-notify');
-        notifier.style.top = (e.clientY - 60) + 'px'
-        notifier.style.left = (e.clientX - 60) + 'px'
-        document.body.appendChild(notifier);
-        const ref = setInterval(() => {
-          notifier.classList.add('clipboard-notify-disapear')
-          clearInterval(ref);
-          const deleteRef = setInterval(() => {
-            notifier.remove();
-            clearInterval(deleteRef);
+        if (!this.notifierActive) {
+          this.notifierActive = true;
+          const notifier = document.createElement('P');
+          notifier.textContent = 'Text Copied!'
+          notifier.classList.add('clipboard-notify');
+          console.log(e);
+          notifier.style.top = (e.pageY - 60) + 'px'
+          notifier.style.left = (e.pageX - 60) + 'px'
+          document.body.appendChild(notifier);
+          const ref = setInterval(() => {
+            notifier.classList.add('clipboard-notify-disapear')
+            clearInterval(ref);
+            const deleteRef = setInterval(() => {
+              notifier.remove();
+              this.notifierActive = false;
+              clearInterval(deleteRef);
+            }, 1000)
           }, 1000)
-        }, 1000)
+        }
       }
     }
   }

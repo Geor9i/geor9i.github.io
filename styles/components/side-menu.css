@@ -69,29 +69,20 @@ aside.side-menu ul {
 }
 
 aside.side-menu li {
+    display: block;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 20px;
     width: 100%;
     padding: 1em 0;
     background-color: rgba(128, 128, 128, 0);
-    transition: background-color 0.3s ease-in;
     text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s ease-in, box-shadow 0.3s ease-in-out;
 }
-
 
 aside.side-menu li:hover {
-    background-color: black;
-}
-
-aside.side-menu li:hover > a {
-    color: white;
     font-weight: 900;
-    font-size: 1.4em;
+    font-size: 1.3em;
 }
 
-aside.side-menu a {
-    display: block;
-    width: 100%;
-    color: rgb(245, 99, 15);
-    font-weight: bold;
-    font-size: 20px;
-}

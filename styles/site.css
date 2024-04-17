@@ -1,6 +1,7 @@
 @import url("reset.css");
 @import url("typography.css");
 @import url("animations/clipboard.css");
+@import url("animations/borders.css");
 @import url('components/side-menu.css');
 @import url('components/main-content.css');
 @import url('components/summary.css');
