@@ -7,6 +7,7 @@ import TechnologiesComponent from "./components/technologies.js";
 import LanguagesComponent from "./components/languages.js";
 import SummaryComponent from "./components/summary.js";
 import ContactsComponent from "./components/contacts.js";
+import ProjectsComponent from "./components/projects.js";
 
 const eventManager = new EventManager(document.body);
 const sideMenu = new SideMenuComponent();
@@ -17,4 +18,5 @@ const contactsComponent = new ContactsComponent();
 const technologiesComponent = new TechnologiesComponent();
 const mainCanvasComponent = new MainCanvasComponent();
 const certificatesComponent = new CertificatesComponent();
+const projectsComponent = new ProjectsComponent();
 const languagesComponent = new LanguagesComponent();

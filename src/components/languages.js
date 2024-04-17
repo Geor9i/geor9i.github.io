@@ -10,7 +10,7 @@ export default class LanguagesComponent {
         this.isDrawing = false;
         this.languages = [
             {lang: 'Bulgarian', level: 100, title:  'Native'},
-            {lang: 'English', level: 80, title:  'Proficient'},
+            {lang: 'English', level: 85, title:  'Proficient'},
             {lang: 'German', level: 30, title:  'Intermediate'},
             {lang: 'Icelandic', level: 15, title:  'Basic'},
         ];
