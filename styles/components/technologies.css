@@ -1,5 +1,4 @@
 #technologies{
-    padding: 4em 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,8 +6,8 @@
 }
 
 #technologies .tech-stack {
-    padding: 0.5em 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 2em;
 }

@@ -5,7 +5,6 @@ export default class MainCanvasComponent {
   constructor() {
     this.eventSubscriberId = "main-canvas";
     this.canvas = document.querySelector("#main-canvas");
-    this.wrapper = document.querySelector(".wrapper");
     this.eventBus = eventBus;
     this.particleClass = Particle;
     this.ctx = null;
@@ -20,9 +19,8 @@ export default class MainCanvasComponent {
   }
 
   init() {
-    const dimensions = this.wrapper.getBoundingClientRect();
-    this.canvas.width = dimensions.width;
-    this.canvas.height = dimensions.height;
+    this.canvas.width = document.body.offsetWidth;
+    this.canvas.height = document.documentElement.scrollHeight;
     this.canvas.classList.remove("inactive");
     this.ctx = this.canvas.getContext("2d");
     // this.grid();
@@ -130,8 +128,8 @@ export default class MainCanvasComponent {
     this.eventBus.subscribe(this.eventSubscriberId, "mousemove", (e) => {
       this.oldMouseX = this.mouseX;
       this.oldMouseY = this.mouseY;
-      this.mouseX = e.clientX;
-      this.mouseY = e.clientY;
+      this.mouseX = e.pageX;
+      this.mouseY = e.pageY;
       if (
         this.mouseX < 0 ||
         this.mouseX > this.canvas.width ||
@@ -151,9 +149,9 @@ export default class MainCanvasComponent {
     });
 
     const resize = () => {
-      const dimensions = this.wrapper.getBoundingClientRect();
-      this.canvas.width = dimensions.width;
-      this.canvas.height = dimensions.height;
+      console.log('resize');
+      this.canvas.width = document.body.offsetWidth;
+    this.canvas.height = document.body.offsetHeight;
     };
     this.eventBus.subscribe(
       this.eventSubscriberId,
@@ -163,7 +161,7 @@ export default class MainCanvasComponent {
   }
   animate() {
     requestAnimationFrame(this.animate.bind(this));
-    this.ctx.clearRect(0, 0, innerWidth, innerHeight);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     Object.keys(this.particles).forEach((particleGroup) => {
       this.particles[particleGroup].forEach((particle) => {
         particle.update({ x: this.mouseX, y: this.mouseY });

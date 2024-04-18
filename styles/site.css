@@ -1,5 +1,6 @@
 @import url("reset.css");
 @import url("typography.css");
+@import url("responsive.css");
 @import url("animations/clipboard.css");
 @import url("animations/borders.css");
 @import url('components/side-menu.css');
@@ -18,13 +19,12 @@
 
 .wrapper {
     position: relative;
-    padding: 8em;
+    padding: 8em 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    max-width: 100vw;
     z-index: 1;
 }
 

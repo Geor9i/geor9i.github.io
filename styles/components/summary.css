@@ -1,3 +1,7 @@
+#summary {
+    gap: 1.5em;
+}
+
 #summary .name {
     font-size: 48px;
     font-weight: bold;
@@ -6,6 +10,7 @@
 }
 
 #summary .summary {
+    padding: 0 1em;
     text-align: center;
     word-spacing: 0.2em;
     letter-spacing: 2px;

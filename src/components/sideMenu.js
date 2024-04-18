@@ -17,10 +17,14 @@ export class SideMenuComponent {
       target: this.menuButton,
     });
 
-    this.eventBus.subscribe(this.eventSubscriberId, "click", this.findCenterclose, {
-      target: [this.sideMenuBackdrop, '.wrapper aside ul li'],
-    });
-
+    this.eventBus.subscribe(
+      this.eventSubscriberId,
+      "click",
+      this.findCenterclose,
+      {
+        target: [this.sideMenuBackdrop, ".wrapper aside ul li"],
+      }
+    );
   }
 
   _toggle = () => {
@@ -36,9 +40,11 @@ export class SideMenuComponent {
     this.sideMenu.classList.add("side-menu-closed");
     this.sideMenuBackdrop.classList.add("inactive");
 
-    const id = e.target.id.split('-')[0];
-    const section = document.getElementById(id);
-    const scrollTarget = section.offsetTop;
-    window.scrollTo({top: scrollTarget, behavior: 'smooth'});
+    const id = e.target.id.split("-")[0];
+    if (id) {
+      const section = document.getElementById(id);
+      const scrollTarget = section.offsetTop;
+      window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+    }
   };
 }

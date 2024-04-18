@@ -1,0 +1,70 @@
+@media (max-width: 1200px) {
+  .wrapper > div.menu-button {
+    min-width: 40px;
+  }
+
+  .wrapper aside.side-menu li {
+    font-size: 2em;
+  }
+
+  .wrapper aside.side-menu {
+    width: 40%;
+  }
+
+  .wrapper aside.side-menu ul {
+    height: 100%;
+    padding: 10vh 0;
+    justify-content: space-evenly;
+  }
+
+  .wrapper #summary .name {
+    font-size: 4em;
+  }
+
+  .wrapper #summary .summary {
+    text-align: center;
+    word-spacing: 0;
+    letter-spacing: 0;
+    font-size: 2em;
+  }
+
+  .wrapper main > #contacts {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper > div.menu-button {
+    min-width: 20px;
+  }
+
+  .wrapper aside.side-menu li {
+    font-size: 1em;
+  }
+
+  #technologies .tech-stack {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrapper #summary .name {
+    font-size: 2em;
+  }
+
+  .wrapper #summary .summary {
+    text-align: center;
+    word-spacing: 0;
+    letter-spacing: 0;
+    font-size: 1em;
+  }
+
+  .wrapper main > #contacts {
+    justify-content: flex-start;
+  }
+
+  .wrapper main > #contacts .contact-container {
+    flex: 1 0 50%;
+    justify-content: flex-start;
+    padding: 0 1em;
+  }
+}
