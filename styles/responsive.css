@@ -31,6 +31,27 @@
   .wrapper main > #contacts {
     flex-direction: row;
   }
+
+  
+#certificates .frame div.img-container {
+  width: 60vw;
+  height: 85.7vw;
+} 
+
+
+#certificates .frame div.arrow.left {
+  left: 0;
+}
+
+#certificates .frame div.arrow.right {
+  right: 0;
+}
+
+#projects .project-container > p.project-description {
+  text-align: center;
+  width: auto;
+}
+
 }
 
 @media (max-width: 600px) {
@@ -60,6 +81,7 @@
 
   .wrapper main > #contacts {
     justify-content: flex-start;
+    overflow: hidden;
   }
 
   .wrapper main > #contacts .contact-container {
@@ -67,4 +89,31 @@
     justify-content: flex-start;
     padding: 0 1em;
   }
+
+  .wrapper main > #contacts .contact-container > p {
+    font-size: 1em;
+  }
+
+  #technologies > div.tech-stack {
+    gap: 0;
+  }
+
+  
+#certificates .frame div.arrow {
+  width: 3em;
+  height: 3em;
+}
+
+
+#certificates .frame div.arrow.left {
+  left: -8%;
+}
+
+#certificates .frame div.arrow.right {
+  right: -8%;
+}
+
+#languages svg.lang-level {
+  width: 68%;
+}
 }

@@ -1,9 +1,9 @@
 .wrapper > main {
     max-width: 100vw;
-    padding: 10em 0;
     display: flex;
     flex-direction: column;
     gap: 10em;
+    overflow: hidden;
 }
 
 .wrapper > main > section {
@@ -23,6 +23,7 @@
   
 
 .wrapper > main > section.show {
+    display: flex;
     opacity: 1;
     transform: translateX(0);
 }
