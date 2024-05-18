@@ -26,7 +26,7 @@ class DHTML {
 
   isValidChar(char) {
     const validator = {
-      openTag: /[^<&\/!]/,
+      openTag: /[^>&\/!]/,
       inTag: /[^>]/,
       closeTag: /[^<&!]/,
       outside: /[^>]/,
