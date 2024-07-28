@@ -34,8 +34,9 @@
 
   
 #certificates .frame div.img-container {
-  width: 60vw;
-  height: 85.7vw;
+  /* width: 60vw;
+  height: 85.7vw; */
+  /* height: 100%;  */
 } 
 
 
