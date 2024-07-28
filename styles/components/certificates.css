@@ -91,7 +91,7 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   transition: opacity 0.1s ease-in;
-  opacity: 0.4;
+  /* opacity: 0.4; */
 }
 
 .open-certificate:hover {
