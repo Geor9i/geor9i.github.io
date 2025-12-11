@@ -14,7 +14,6 @@ export default class ContactsComponent {
   init() {
     this.contacts = [
         {text: 'gurumov93@gmail.com', icon: 'email', id: 'email'},
-        {text: 'LinkedIn',  link: 'https://www.linkedin.com/in/georgi-urumov-978768bb/', icon: 'linkedin', id: 'linkedin'},
         {text: 'GitHub', link: 'https://github.com/geor9i', icon: 'github', id: 'github'},
     ];
      this.display();
